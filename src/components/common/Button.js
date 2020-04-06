@@ -39,6 +39,19 @@ const buttonStyle = css`
         }
       `}
 
+    ${(props) =>
+      props.width &&
+      css`
+        width: ${props.width};
+      `}
+
+
+    ${(props) =>
+      props.height &&
+      css`
+        height: ${props.height};
+      `}
+
   ${(props) =>
     props.fluid &&
     css`

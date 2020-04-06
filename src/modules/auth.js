@@ -12,10 +12,14 @@ const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] = createActionTypes(
 );
 
 export const initializeForm = createAction(INITIALIZE_FORM);
-export const changeField = createAction(CHANGE_FIELD, ({ name, value }) => ({
-  name,
-  value,
-}));
+export const changeField = createAction(
+  CHANGE_FIELD,
+  ({ form, name, value }) => ({
+    form,
+    name,
+    value,
+  })
+);
 export const login = createAction(LOGIN, ({ username, password }) => ({
   username,
   password,
@@ -33,39 +37,49 @@ export function* authSaga() {
 }
 
 const initialState = {
-  username: "",
-  password: "",
-  passwordConfirm: "",
+  login: {
+    username: "",
+    password: "",
+    error: null,
+  },
+  register: {
+    username: "",
+    password: "",
+    passwordConfirm: "",
+    error: null,
+  },
   auth: null,
-  error: null,
 };
 
 const auth = handleActions(
   {
     [INITIALIZE_FORM]: () => initialState,
-    [CHANGE_FIELD]: (state, { payload: { name, value } }) => ({
+    [CHANGE_FIELD]: (state, { payload: { form, name, value } }) => ({
       ...state,
-      [name]: value,
+      [form]: {
+        ...state[form],
+        [name]: value,
+      },
     }),
     [LOGIN_SUCCESS]: (state, { payload: auth }) => ({
       ...state,
       auth,
-      error: null,
+      login: { ...state.login, error: null },
     }),
     [LOGIN_FAILURE]: (state, { payload: error }) => ({
       ...state,
       auth: null,
-      error,
+      login: { ...state.login, error },
     }),
     [REGISTER_SUCCESS]: (state, { payload: auth }) => ({
       ...state,
       auth,
-      error: null,
+      register: { ...state.register, error: null },
     }),
     [REGISTER_FAILURE]: (state, { payload: error }) => ({
       ...state,
       auth: null,
-      error,
+      register: { ...state.register, error },
     }),
   },
   initialState

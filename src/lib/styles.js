@@ -1,9 +1,9 @@
 const styles = {
   header: {
-    height: "5rem",
+    height: "5.5rem",
   },
   wrapper: {
-    marginTop: "1rem",
+    marginTop: "3rem",
     marginLeft: "1rem",
     marginRight: "1rem",
   },

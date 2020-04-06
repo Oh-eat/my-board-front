@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { IoMdKey } from "react-icons/io";
+import { IoMdKey, IoMdLogOut } from "react-icons/io";
 import Button from "./Button";
 import styles from "../../lib/styles";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../modules/user";
 
 const HeaderBlock = styled.div`
   width: 100%;
@@ -36,9 +38,22 @@ const HeaderContents = styled.div`
       color: ${styles.button.transparent.hover};
     }
   }
+
+  .right {
+    display: flex;
+    align-items: center;
+
+    button {
+      margin-left: 0.5rem;
+    }
+  }
 `;
 
 function Header(props) {
+  const dispatch = useDispatch();
+  const user = useSelector(({ user }) => user.user);
+  const onLogout = () => dispatch(logout());
+
   return (
     <HeaderBlock>
       <HeaderWrapper>
@@ -47,9 +62,19 @@ function Header(props) {
             <h1>My Board</h1>
           </Link>
           <div className="right">
-            <Button transparent="true" to="/login">
-              <IoMdKey size="2rem" />
-            </Button>
+            {!user && (
+              <Button transparent="true" to="/login">
+                <IoMdKey size="2rem" />
+              </Button>
+            )}
+            {user && (
+              <>
+                <h3>{user.username}</h3>
+                <Button transparent onClick={onLogout}>
+                  <IoMdLogOut size="2rem" />
+                </Button>
+              </>
+            )}
           </div>
         </HeaderContents>
       </HeaderWrapper>

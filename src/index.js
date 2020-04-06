@@ -8,10 +8,18 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import createSagaMiddleware from "redux-saga";
 import rootReducer, { rootSaga } from "./modules";
+import { check, tempSetUser } from "./modules/user";
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(rootSaga);
+
+(function () {
+  const user = localStorage.getItem("user");
+  if (!user) return;
+  store.dispatch(tempSetUser(user));
+  store.dispatch(check());
+})();
 
 ReactDOM.render(
   <React.StrictMode>

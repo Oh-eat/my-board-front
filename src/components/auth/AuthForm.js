@@ -79,7 +79,8 @@ function AuthForm({
   onSubmit,
   onChangeField,
 }) {
-  const text = textMap[type || "login"];
+  const text = textMap[type];
+
   return (
     <AuthFormBlock>
       <h2>{text}</h2>

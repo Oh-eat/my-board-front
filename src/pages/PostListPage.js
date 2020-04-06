@@ -1,7 +1,8 @@
 import React from "react";
+import PostListViewerContainer from "../containers/posts/PostListViewerContainer";
 
 function PostListPage(props) {
-  return <div></div>;
+  return <PostListViewerContainer />;
 }
 
 export default PostListPage;
