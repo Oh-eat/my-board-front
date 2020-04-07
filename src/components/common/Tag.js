@@ -11,13 +11,19 @@ const TagBlock = styled.div`
   font-size: ${(props) => props.fontSize || "0.9rem"};
   cursor: pointer;
   display: inline-block;
+  user-select: none;
+
   &:hover {
     background: ${styles.button.color.blue.hover};
   }
 `;
 
-function Tag({ tag, fontSize }) {
-  return <TagBlock fontSize={fontSize}># {tag}</TagBlock>;
+function Tag({ tag, fontSize, onClick }) {
+  return (
+    <TagBlock fontSize={fontSize} onClick={onClick}>
+      # {tag}
+    </TagBlock>
+  );
 }
 
-export default Tag;
+export default React.memo(Tag);

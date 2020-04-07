@@ -13,6 +13,14 @@ const buttonStyle = css`
   cursor: pointer;
   height: 2.5rem;
 
+  &:disabled {
+    background: rgb(200,200,200);
+
+    &:hover {
+      background: rgb(200,200,200);
+    }
+  }
+
   ${(props) =>
     props.color
       ? css`

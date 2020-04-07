@@ -1,12 +1,12 @@
 import React from "react";
-import AuthTemplate from "../components/auth/AuthTemplate";
+import FormTemplate from "../components/common/FormTemplate.js";
 import RegisterForm from "../containers/auth/RegisterForm";
 
 function RegisterPage(props) {
   return (
-    <AuthTemplate>
+    <FormTemplate>
       <RegisterForm />
-    </AuthTemplate>
+    </FormTemplate>
   );
 }
 

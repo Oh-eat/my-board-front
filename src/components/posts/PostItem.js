@@ -35,6 +35,14 @@ const PostItemTop = styled.div`
 
     a {
       margin-left: 0.25rem;
+
+      &:visited {
+        color: gray;
+      }
+
+      &:hover {
+        color: dodgerblue;
+      }
     }
   }
 

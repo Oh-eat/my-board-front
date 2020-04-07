@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const AuthTemplateBlock = styled.div`
+const FormTemplateBlock = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
@@ -10,20 +10,20 @@ const AuthTemplateBlock = styled.div`
 `;
 
 const WhiteBox = styled.div`
-  width: 300px;
-  min-width: 300px;
+  width: ${(props) => props.width};
+  min-width: ${(props) => props.width};
   height: auto;
   padding: 2rem;
   background: white;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
 `;
 
-function AuthTemplate({ children }) {
+function FormTemplate({ children, width = "300px" }) {
   return (
-    <AuthTemplateBlock>
-      <WhiteBox>{children}</WhiteBox>
-    </AuthTemplateBlock>
+    <FormTemplateBlock>
+      <WhiteBox width={width}>{children}</WhiteBox>
+    </FormTemplateBlock>
   );
 }
 
-export default AuthTemplate;
+export default FormTemplate;
