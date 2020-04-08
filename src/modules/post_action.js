@@ -21,6 +21,11 @@ const [
   CHECK_UPDATE_SUCCESS,
   CHECK_UPDATE_FAILURE,
 ] = createActionTypes("postAction/CHECK_UPDATE");
+const [
+  CHECK_DELETE,
+  CHECK_DELETE_SUCCESS,
+  CHECK_DELETE_FAILURE,
+] = createActionTypes("postAction/CHECK_DELETE");
 const [WRITE_POST, WRITE_POST_SUCCESS, WRITE_POST_FAILURE] = createActionTypes(
   "postAction/WRITE_POST"
 );
@@ -29,6 +34,11 @@ const [
   UPDATE_POST_SUCCESS,
   UPDATE_POST_FAILURE,
 ] = createActionTypes("postAction/UPDATE_POST");
+const [
+  DELETE_POST,
+  DELETE_POST_SUCCESS,
+  DELETE_POST_FAILURE,
+] = createActionTypes("postAction/DELETE_POST");
 
 export const clearError = createAction(CLEAR_ERROR);
 export const clearCheck = createAction(CLEAR_CHECK);
@@ -49,7 +59,14 @@ export const checkWrite = createAction(
   CHECK_WRITE,
   ({ username, password }) => ({ username, password })
 );
-export const checkUpdate = createAction(CHECK_UPDATE, (password) => password);
+export const checkUpdate = createAction(CHECK_UPDATE, ({ id, password }) => ({
+  id,
+  password,
+}));
+export const checkDelete = createAction(CHECK_DELETE, ({ id, password }) => ({
+  id,
+  password,
+}));
 export const writePost = createAction(
   WRITE_POST,
   ({ title, body, tags, username, password }) => ({
@@ -70,19 +87,30 @@ export const updatePost = createAction(
     password,
   })
 );
+export const deletePost = createAction(DELETE_POST, ({ id, password }) => ({
+  id,
+  password,
+}));
 
 const checkWriteSaga = createRequestSaga(CHECK_WRITE, checkAPI.checkPostWrite);
 const checkUpdateSaga = createRequestSaga(
   CHECK_UPDATE,
   checkAPI.checkPostUpdate
 );
+const checkDeleteSaga = createRequestSaga(
+  CHECK_DELETE,
+  checkAPI.checkPostDelete
+);
 const writePostSaga = createRequestSaga(WRITE_POST, postAPI.write);
 const updatePostSaga = createRequestSaga(UPDATE_POST, postAPI.update);
+const deletePostSaga = createRequestSaga(DELETE_POST, postAPI.remove);
 export function* postActionSaga() {
   yield takeLatest(CHECK_WRITE, checkWriteSaga);
   yield takeLatest(CHECK_UPDATE, checkUpdateSaga);
+  yield takeLatest(CHECK_DELETE, checkDeleteSaga);
   yield takeLatest(WRITE_POST, writePostSaga);
   yield takeLatest(UPDATE_POST, updatePostSaga);
+  yield takeLatest(DELETE_POST, deletePostSaga);
 }
 
 const initialState = {
@@ -138,12 +166,11 @@ const postAction = handleActions(
     [CHECK_WRITE]: (state) => ({
       ...state,
       permission: false,
-      error: null,
     }),
     [CHECK_WRITE_SUCCESS]: (state, { status }) => ({
       ...state,
-      permission: status === 200 ? true : false,
-      error: status === 200 ? null : status,
+      permission: true,
+      error: null,
     }),
     [CHECK_WRITE_FAILURE]: (state, { payload: error }) => ({
       ...state,
@@ -153,14 +180,27 @@ const postAction = handleActions(
     [CHECK_UPDATE]: (state) => ({
       ...state,
       permission: false,
-      error: null,
     }),
     [CHECK_UPDATE_SUCCESS]: (state, { status }) => ({
       ...state,
-      permission: status === 200 ? true : false,
-      error: status === 200 ? null : status,
+      permission: true,
+      error: null,
     }),
     [CHECK_UPDATE_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      permission: false,
+      error,
+    }),
+    [CHECK_DELETE]: (state) => ({
+      ...state,
+      permission: false,
+    }),
+    [CHECK_DELETE_SUCCESS]: (state, { status }) => ({
+      ...state,
+      permission: true,
+      error: null,
+    }),
+    [CHECK_DELETE_FAILURE]: (state, { payload: error }) => ({
       ...state,
       permission: false,
       error,
@@ -183,6 +223,15 @@ const postAction = handleActions(
     [UPDATE_POST_FAILURE]: (state, { payload: error }) => ({
       ...state,
       post: null,
+      error,
+    }),
+    [DELETE_POST_SUCCESS]: (state, { status }) => ({
+      ...state,
+      permission: status,
+      error: null,
+    }),
+    [DELETE_POST_FAILURE]: (state, { payload: error }) => ({
+      ...state,
       error,
     }),
   },

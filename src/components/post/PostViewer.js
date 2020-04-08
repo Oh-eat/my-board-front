@@ -40,7 +40,7 @@ const PostBody = styled.div`
   margin-top: 1rem;
 `;
 
-function PostViewer({ post, showActionButtons, onUpdate, onRemove }) {
+function PostViewer({ post, showActionButtons, onUpdate, onRemoveClick }) {
   return (
     <PostViewerBlock>
       <Toolbar>
@@ -52,7 +52,7 @@ function PostViewer({ post, showActionButtons, onUpdate, onRemove }) {
             <Button onClick={onUpdate}>
               <FiEdit size="1.5rem" />
             </Button>
-            <Button color="red" onClick={onRemove}>
+            <Button color="red" onClick={onRemoveClick}>
               <FiTrash size="1.5rem" />
             </Button>
           </div>
