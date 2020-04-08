@@ -17,8 +17,13 @@ export const write = ({ title, body, tags, username, password }) =>
   });
 
 export const update = ({ id, title, body, tags, password }) => {
-  console.log(id, title, body, tags, password);
-  return client.patch(`/api/posts/${id}`, { title, body, tags, password });
+  console.log(password);
+  return client.patch(`/api/posts/${id}`, {
+    title,
+    body,
+    tags,
+    ...(password ? { password } : {}),
+  });
 };
 
 export const remove = ({ id, password }) =>

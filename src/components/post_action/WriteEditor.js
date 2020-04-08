@@ -30,6 +30,7 @@ function WriteEditor({ post, onChangeTitle, onChangeBody }) {
         onChange={onChangeTitle}
         spellCheck={false}
         maxLength={50}
+        autoFocus
       />
       <Editor value={post.body} onChange={onChangeBody} />
     </WriteEditorBlock>

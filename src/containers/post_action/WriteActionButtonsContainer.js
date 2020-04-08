@@ -15,8 +15,9 @@ function WriteActionButtonsContainer({ history }) {
     password,
     post,
     error,
+    user,
     loading,
-  } = useSelector(({ postAction, loading }) => ({
+  } = useSelector(({ postAction, user, loading }) => ({
     write: postAction.write,
     edit: postAction.edit,
     postId: postAction.postId,
@@ -24,6 +25,7 @@ function WriteActionButtonsContainer({ history }) {
     password: postAction.password,
     post: postAction.post,
     error: postAction.error,
+    user: user.user,
     loading:
       loading[
         postAction.postId ? "postAction/UPDATE_POST" : "postAction/WRITE_POST"
@@ -34,7 +36,7 @@ function WriteActionButtonsContainer({ history }) {
   const onSubmit = useCallback(() => {
     const posting = postId ? edit : write;
     const { title, body, tags } = posting;
-    // console.log(title, body, tags, username, password);
+
     if (title.trim() === "" || body.trim() === "") {
       setInputError("제목과 내용을 빠짐없이 입력해 주세요.");
       return;
@@ -42,21 +44,35 @@ function WriteActionButtonsContainer({ history }) {
     if (loading) {
       return;
     }
+
     if (postId) {
-      dispatch(updatePost({ id: postId, title, body, tags, password }));
+      dispatch(
+        updatePost({
+          id: postId,
+          title,
+          body,
+          tags,
+          ...(user ? {} : { password }),
+        })
+      );
       return;
     }
-    dispatch(writePost({ title, body, tags, username, password }));
-  }, [dispatch, loading, postId, edit, write, username, password]);
+    dispatch(
+      writePost({ title, body, tags, ...(user ? {} : { username, password }) })
+    );
+  }, [dispatch, loading, postId, edit, write, username, password, user]);
 
   useEffect(() => {
     if (!post) {
-      const unblock = history.block("작성 중인 내용을 잃게 됩니다.");
       return () => {
+        const unblock = history.block("작성 중인 내용을 잃게 됩니다.");
         unblock();
       };
     }
+    history.push(`/post/read/${post._id}`);
+  }, [history, post]);
 
+  useEffect(() => {
     if (error) {
       if (error.response.status === 400) {
         setInputError("조건에 맞게 포스트를 작성해 주세요.");
@@ -66,9 +82,7 @@ function WriteActionButtonsContainer({ history }) {
       setInputError("요청 실패. 나중에 다시 시도해 주세요.");
       return;
     }
-
-    history.push(`/post/read/${post._id}`);
-  }, [history, post, error]);
+  }, [error]);
 
   return (
     <WriteActionButtons

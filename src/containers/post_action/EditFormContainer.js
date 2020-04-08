@@ -1,13 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import EditForm from "../../components/post_action/EditForm";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  changeForm,
-  clearCheck,
-  clearError,
-  checkUpdate,
-  unloadPost,
-} from "../../modules/post_action";
+import { changeForm, checkUpdate } from "../../modules/post_action";
 import { withRouter } from "react-router-dom";
 
 function EditFormContainer({ history }) {

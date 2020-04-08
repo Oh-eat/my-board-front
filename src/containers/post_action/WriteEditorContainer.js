@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changePost, clearCheck, unloadPost } from "../../modules/post_action";
+import { changePost } from "../../modules/post_action";
 import WriteEditor from "../../components/post_action/WriteEditor";
 
 function WriteEditorContainer(props) {

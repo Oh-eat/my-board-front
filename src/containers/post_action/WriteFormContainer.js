@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
 import WriteForm from "../../components/post_action/WriteForm";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  changeForm,
-  checkWrite,
-  clearCheck,
-  clearError,
-} from "../../modules/post_action";
+import { changeForm, checkWrite } from "../../modules/post_action";
 
 function WriteFormContainer(props) {
   const [inputError, setInputError] = useState(null);
@@ -15,8 +10,6 @@ function WriteFormContainer(props) {
     username: postAction.username,
     password: postAction.password,
     error: postAction.error,
-    // permission: postAction.permission,
-    // loading: loading["postAction/CHECK_WRITE"],
   }));
 
   const onChangeForm = (e) => {
