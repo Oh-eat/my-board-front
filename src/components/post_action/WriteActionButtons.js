@@ -6,23 +6,37 @@ import { TiPencil } from "react-icons/ti";
 
 const WriteActionButtonsBlock = styled.div`
   display: flex;
-  justify-content: flex-end;
-  margin-top: 2rem;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  width: 100%;
 
-  button + button {
-    margin-left: 0.75rem;
+  .error {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: red;
+    font-size: 0.9rem;
+  }
+
+  .buttons {
+    display: flex;
+    margin-left: 1rem;
   }
 `;
 
-function WriteActionButtons({ onGoBack }) {
+function WriteActionButtons({ inputError, onGoBack, onSubmit }) {
   return (
     <WriteActionButtonsBlock>
-      <Button width="5rem" height="2.5rem" onClick={onGoBack}>
-        <IoMdArrowBack size="1.5rem" />
-      </Button>
-      <Button width="5rem" height="2.5rem">
-        <TiPencil size="1.5rem" />
-      </Button>
+      <div className="error">{inputError || ""}</div>
+      <div className="buttons">
+        <Button width="5rem" height="2.5rem" onClick={onGoBack}>
+          <IoMdArrowBack size="1.5rem" />
+        </Button>
+        <Button width="5rem" height="2.5rem" onClick={onSubmit}>
+          <TiPencil size="1.5rem" />
+        </Button>
+      </div>
     </WriteActionButtonsBlock>
   );
 }

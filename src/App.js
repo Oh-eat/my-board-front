@@ -14,10 +14,10 @@ function App() {
       <Header />
       <Wrapper>
         <Route path={["/", "/post"]} exact component={PostListPage} />
-        <Route path="/post/:postId" exact component={PostPage} />
+        <Route path="/post/read/:postId" exact component={PostPage} />
         <Route path="/login" exact component={LoginPage} />
         <Route path="/register" exact component={RegisterPage} />
-        <Route path="/write" exact component={WritePage} />
+        <Route path="/post/write" exact component={WritePage} />
       </Wrapper>
     </>
   );

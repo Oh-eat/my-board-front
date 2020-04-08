@@ -67,6 +67,7 @@ function AuthForm({
           placeholder="아이디"
           maxLength={15}
           onChange={onChangeField}
+          alnumOnly
         />
         {/* {type === "register" && (
           <div className="help">2 ~ 15자의 알파벳 또는 숫자</div>
@@ -79,6 +80,7 @@ function AuthForm({
           placeholder="비밀번호"
           maxLength={15}
           onChange={onChangeField}
+          alnumOnly
         />
         {/* {type === "register" && <div className="help">4 ~ 15자</div>} */}
         {type === "register" && (
@@ -87,9 +89,10 @@ function AuthForm({
             name="passwordConfirm"
             value={passwordConfirm}
             type="password"
-            placeholder="비밀번호"
+            placeholder="비밀번호 확인"
             maxLength={15}
             onChange={onChangeField}
+            alnumOnly
           />
         )}
         {/* {type === "register" && (

@@ -4,11 +4,11 @@ import "quill/dist/quill.snow.css";
 import styled from "styled-components";
 
 const EditorBlock = styled.div`
-  margin-top: ${(props) => props.marginTop || "2rem"};
+  margin-top: ${(props) => props.marginTop || "1.5rem"};
 
   .ql-editor {
     padding: 1rem;
-    min-height: ${(props) => props.height || "30rem"};
+    min-height: ${(props) => props.height || "35vh"};
     font-size: 1.125rem;
     line-height: 1.5;
   }
@@ -53,9 +53,9 @@ function Editor({ value, onChange, height }) {
 
   const mounted = useRef(null);
   useEffect(() => {
-    if (mounted) return;
+    if (mounted.current) return;
     mounted.current = true;
-    quillInstance.root.innerHTML = value;
+    quillInstance.current.root.innerHTML = value;
   }, [value]);
 
   return (

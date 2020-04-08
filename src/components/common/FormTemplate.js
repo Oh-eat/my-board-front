@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import styles from "../../lib/styles";
 
 const FormTemplateBlock = styled.div`
-  height: 100%;
+  height: calc(100vh - ${styles.header.height} - ${styles.wrapper.marginTop}*2);
   width: 100%;
   display: flex;
   justify-content: center;

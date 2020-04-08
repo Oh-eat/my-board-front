@@ -6,6 +6,7 @@ const TagBlock = styled.div`
   padding-left: 0.4rem;
   padding-right: 0.4rem;
   margin-right: 0.25rem;
+  margin-bottom: ${(props) => (props.withMarginBottom ? "0.25rem" : "0")};
   background: dodgerblue;
   color: white;
   font-size: ${(props) => props.fontSize || "0.9rem"};

@@ -25,19 +25,18 @@ function WriteFormContainer(props) {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    if ([username.trim(), password.trim()].includes("")) {
+
+    if (
+      !username ||
+      !password ||
+      [username.trim(), password.trim()].includes("")
+    ) {
       setInputError("모든 항목을 빠짐없이 입력해 주세요.");
       return;
     }
+
     dispatch(checkWrite({ username, password }));
   };
-
-  useEffect(() => {
-    dispatch(clearCheck());
-    return () => {
-      dispatch(clearError());
-    };
-  }, [dispatch]);
 
   useEffect(() => {
     if (error) {
@@ -55,8 +54,8 @@ function WriteFormContainer(props) {
 
   return (
     <WriteForm
-      username={username}
-      password={password}
+      username={username || ""}
+      password={password || ""}
       inputError={inputError}
       onChangeForm={onChangeForm}
       onSubmit={onSubmit}

@@ -1,7 +1,10 @@
 import React from "react";
+import { FiEdit, FiTrash } from "react-icons/fi";
 import Tag from "../common/Tag";
 import formatDate from "../../lib/formatDate";
 import styled from "styled-components";
+import Toolbar from "../common/Toolbar";
+import Button from "../common/Button";
 
 const PostViewerBlock = styled.div`
   hr {
@@ -12,6 +15,8 @@ const PostViewerBlock = styled.div`
 `;
 
 const PostHead = styled.div`
+  margin-top: 1rem;
+
   h1 {
     font-size: 2.5rem;
     word-break: break-all;
@@ -35,9 +40,24 @@ const PostBody = styled.div`
   margin-top: 1rem;
 `;
 
-function PostViewer({ post }) {
+function PostViewer({ post, showActionButtons, onUpdate, onRemove }) {
   return (
     <PostViewerBlock>
+      <Toolbar>
+        <div className="left">
+          <h2>포스트</h2>
+        </div>
+        {showActionButtons && (
+          <div className="right">
+            <Button onClick={onUpdate}>
+              <FiEdit size="1.5rem" />
+            </Button>
+            <Button color="red" onClick={onRemove}>
+              <FiTrash size="1.5rem" />
+            </Button>
+          </div>
+        )}
+      </Toolbar>
       <PostHead>
         <h1>{post.title}</h1>
         {post.tags.map((tag) => (
@@ -53,7 +73,7 @@ function PostViewer({ post }) {
       </SubInfo>
       <hr />
       <PostBody>
-        <p>{post.body}</p>
+        <p dangerouslySetInnerHTML={{ __html: post.body }}></p>
       </PostBody>
     </PostViewerBlock>
   );

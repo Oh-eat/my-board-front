@@ -15,7 +15,8 @@ const buttonStyle = css`
 
   &:disabled {
     background: rgb(200,200,200);
-
+    cursor:initial;
+    
     &:hover {
       background: rgb(200,200,200);
     }
@@ -70,10 +71,26 @@ const buttonStyle = css`
 
 const StyledButton = styled.button`
   ${buttonStyle}
+
+  & + & {
+    margin-left: 0.75rem;
+  }
+
+  & + a {
+    margin-left: 0.75rem;
+  }
 `;
 
 const StyledLink = styled(Link)`
   ${buttonStyle}
+
+  &+& {
+    margin-left: 0.75rem;
+  }
+
+  & + button {
+    margin-left: 0.75rem;
+  }
 `;
 
 function Button({ to, ...props }) {

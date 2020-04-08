@@ -35,7 +35,14 @@ function InputWithIcon({
   placeholder,
   maxLength,
   onChange,
+  alnumOnly,
 }) {
+  const changeValidation = (e) => {
+    const { value } = e.target;
+    if (alnumOnly && !RegExp(/^[a-zA-Z0-9]*$/).test(value)) return;
+    onChange(e);
+  };
+
   return (
     <InputWithIconBlock>
       <span className="icon">{icon}</span>
@@ -46,7 +53,7 @@ function InputWithIcon({
         placeholder={placeholder}
         spellCheck={false}
         maxLength={maxLength}
-        onChange={onChange}
+        onChange={changeValidation}
       />
     </InputWithIconBlock>
   );

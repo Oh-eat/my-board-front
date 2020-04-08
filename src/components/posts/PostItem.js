@@ -30,6 +30,7 @@ const PostItemTop = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    display: block;
     height: 100%;
     font-size: 0.9rem;
 
@@ -69,7 +70,7 @@ function PostItem({ post }) {
       <PostItemTop>
         <TiDocumentText size="1.1rem" />
         <div className="title">
-          <Link to={`/post/${post._id}`}>{post.title}</Link>
+          <Link to={`/post/read/${post._id}`}>{post.title}</Link>
         </div>
         <div className="author">{post.author.username}</div>
         <div className="date">{formatDate(post.publishedDate)}</div>

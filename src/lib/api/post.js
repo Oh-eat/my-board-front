@@ -8,10 +8,18 @@ export const list = ({ username, tag, page }) => {
 
 export const read = (id) => client.get(`/api/posts/${id}`);
 
-export const write = ({ title, body, tags }) =>
-  client.post(`api/posts`, { title, body, tags });
+export const write = ({ title, body, tags, username, password }) =>
+  client.post(`/api/posts`, {
+    title,
+    body,
+    tags,
+    ...(username ? { username, password } : {}),
+  });
 
-export const update = ({ id, title, body, tags }) =>
-  client.patch(`api/posts/${id}`, { title, body, tags });
+export const update = ({ id, title, body, tags, password }) => {
+  console.log(id, title, body, tags, password);
+  return client.patch(`/api/posts/${id}`, { title, body, tags, password });
+};
 
-export const remove = (id) => client.delete(`api/posts/${id}`);
+export const remove = ({ id, password }) =>
+  client.delete(`/api/posts/${id}`, { password });

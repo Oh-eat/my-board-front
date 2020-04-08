@@ -1,9 +1,7 @@
-import React, { useState, useCallback } from "react";
+import React from "react";
 import styled from "styled-components";
 import Button from "../common/Button";
 import { GoTag } from "react-icons/go";
-import { useDispatch } from "react-redux";
-import { changePost } from "../../modules/post_action";
 import Tag from "../common/Tag";
 
 const StyledTagInput = styled.input`
@@ -15,14 +13,24 @@ const StyledTagInput = styled.input`
   margin-right: 1rem;
   border-bottom: 1px solid gray;
 
+  &:disabled {
+    background: white;
+  }
+
   &:focus {
     border-bottom-color: black;
+  }
+
+  @media (max-width: 480px) {
+    max-width: initial;
+    flex: 1;
   }
 `;
 
 const TagBoxBlock = styled.div`
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   display: flex;
+  align-items: flex-start;
 
   .input {
     display: flex;
@@ -34,50 +42,28 @@ const TagBoxBlock = styled.div`
     margin-left: 2rem;
     flex-wrap: wrap;
   }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: stretch;
+
+    .tags {
+      margin-left: 0;
+      margin-top: 0.5rem;
+    }
+  }
 `;
 
-function TagBox({ action, tags }) {
-  const [input, setInput] = useState("");
-  const dispatch = useDispatch();
-
-  const onChange = useCallback((e) => {
-    setInput(e.target.value);
-  }, []);
-  const onSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
-
-      if (input.trim() === "") {
-        return;
-      }
-
-      if (tags.includes(input)) {
-        setInput("");
-        return;
-      }
-
-      const nextTags = [...tags, input];
-      dispatch(changePost({ action, name: "tags", value: nextTags }));
-      setInput("");
-    },
-    [input, dispatch, action, tags]
-  );
-  const onRemove = useCallback(
-    (tag) => {
-      const nextTags = tags.filter((t) => t !== tag);
-      dispatch(changePost({ action, name: "tags", value: nextTags }));
-    },
-    [tags, dispatch, action]
-  );
-
+function TagBox({ input, tags, onChange, onSubmit, onRemove }) {
   return (
     <TagBoxBlock>
       <form className="input" onSubmit={onSubmit}>
         <StyledTagInput
           value={input}
-          placeholder="태그"
+          placeholder={tags.length < 7 ? "태그" : "태그 한도 초과"}
           maxLength={10}
           onChange={onChange}
+          disabled={tags.length >= 7}
         />
         <Button
           type="submit"
@@ -88,11 +74,13 @@ function TagBox({ action, tags }) {
           <GoTag size="1.25rem" />
         </Button>
       </form>
-      <div className="tags">
-        {tags.map((tag) => (
-          <Tag key={tag} tag={tag} onClick={() => onRemove(tag)} />
-        ))}
-      </div>
+      {tags.length > 0 && (
+        <div className="tags">
+          {tags.map((tag) => (
+            <Tag key={tag} tag={tag} onClick={() => onRemove(tag)} />
+          ))}
+        </div>
+      )}
     </TagBoxBlock>
   );
 }

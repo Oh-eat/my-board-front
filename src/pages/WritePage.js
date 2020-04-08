@@ -1,14 +1,45 @@
-import React from "react";
-import PostWriteContainer from "../containers/post_action/PostWriteContainer";
+import React, { useEffect } from "react";
 import WriteFormContainer from "../containers/post_action/WriteFormContainer";
 import FormTemplate from "../components/common/FormTemplate";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import WriteEditorContainer from "../containers/post_action/WriteEditorContainer";
+import TagBoxContainer from "../containers/post_action/TagBoxContainer";
+import WriteActionButtonsContainer from "../containers/post_action/WriteActionButtonsContainer";
+import EditFormContainer from "../containers/post_action/EditFormContainer";
+import { unloadPost, clearCheck } from "../modules/post_action";
 
 function WritePage(props) {
-  const { permission, user } = useSelector(({ postAction, user }) => ({
+  const dispatch = useDispatch();
+  const { postId, permission, user } = useSelector(({ postAction, user }) => ({
+    postId: postAction.postId,
     permission: postAction.permission,
     user: user.user,
   }));
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearCheck());
+      dispatch(unloadPost());
+    };
+  }, [dispatch]);
+
+  if (postId) {
+    if (!permission && !user) {
+      return (
+        <FormTemplate>
+          <EditFormContainer />
+        </FormTemplate>
+      );
+    }
+
+    return (
+      <>
+        <WriteEditorContainer />
+        <TagBoxContainer />
+        <WriteActionButtonsContainer />
+      </>
+    );
+  }
 
   return (
     <>
@@ -17,7 +48,13 @@ function WritePage(props) {
           <WriteFormContainer />
         </FormTemplate>
       )}
-      {(permission || user) && <PostWriteContainer />}
+      {(permission || user) && (
+        <>
+          <WriteEditorContainer />
+          <TagBoxContainer />
+          <WriteActionButtonsContainer />
+        </>
+      )}
     </>
   );
 }

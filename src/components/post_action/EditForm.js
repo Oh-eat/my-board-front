@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { FaUserAlt } from "react-icons/fa";
 import { IoMdLock } from "react-icons/io";
 import Button from "../common/Button";
 import InputWithIcon from "../common/InputWithIcon";
 
-const WriteFormBlock = styled.div`
+const EditFormBlock = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,20 +28,11 @@ const WriteFormBlock = styled.div`
   }
 `;
 
-function WriteForm({ username, password, inputError, onSubmit, onChangeForm }) {
+function EditForm({ password, inputError, onSubmit, onChangeForm }) {
   return (
-    <WriteFormBlock>
-      <h2>포스트 작성</h2>
+    <EditFormBlock>
+      <h2>포스트 수정</h2>
       <form onSubmit={onSubmit}>
-        <InputWithIcon
-          icon={<FaUserAlt />}
-          name="username"
-          value={username}
-          placeholder="작성자명"
-          maxLength={15}
-          onChange={onChangeForm}
-          alnumOnly
-        />
         <InputWithIcon
           icon={<IoMdLock size="1.5rem" />}
           name="password"
@@ -58,8 +48,8 @@ function WriteForm({ username, password, inputError, onSubmit, onChangeForm }) {
           계속
         </Button>
       </form>
-    </WriteFormBlock>
+    </EditFormBlock>
   );
 }
 
-export default WriteForm;
+export default EditForm;
