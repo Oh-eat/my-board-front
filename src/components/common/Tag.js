@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import styles from "../../lib/styles";
+import { withRouter } from "react-router-dom";
 
 const TagBlock = styled.div`
   padding-left: 0.4rem;
@@ -19,12 +20,16 @@ const TagBlock = styled.div`
   }
 `;
 
-function Tag({ tag, fontSize, onClick }) {
+function Tag({ tag, fontSize, onClick, history }) {
+  const defaultClick = () => {
+    history.push(`/post?tag=${tag}`);
+  };
+
   return (
-    <TagBlock fontSize={fontSize} onClick={onClick}>
+    <TagBlock fontSize={fontSize} onClick={onClick || defaultClick}>
       # {tag}
     </TagBlock>
   );
 }
 
-export default React.memo(Tag);
+export default React.memo(withRouter(Tag));
