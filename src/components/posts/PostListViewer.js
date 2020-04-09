@@ -4,6 +4,7 @@ import { TiPencil } from "react-icons/ti";
 import Button from "../common/Button";
 import PostItem from "./PostItem";
 import Toolbar from "../common/Toolbar";
+import PaginationContainer from "../../containers/posts/PaginationContainer";
 
 const PostListViewerBlock = styled.div`
   display: flex;
@@ -33,7 +34,7 @@ function PostListViewer({ posts }) {
           <PostItem key={post._id} post={post} />
         ))}
       </div>
-      <div className="foot"></div>
+      <PaginationContainer />
     </PostListViewerBlock>
   );
 }

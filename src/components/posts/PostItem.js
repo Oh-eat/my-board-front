@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { TiDocumentText } from "react-icons/ti";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import Tag from "../common/Tag";
 import formatDate from "../../lib/formatDate";
 
@@ -64,7 +64,7 @@ const PostItemBottom = styled.div`
   margin-top: 0.25rem;
 `;
 
-function PostItem({ post }) {
+function PostItem({ post, history }) {
   return (
     <PostItemBlock>
       <PostItemTop>
@@ -86,4 +86,4 @@ function PostItem({ post }) {
   );
 }
 
-export default PostItem;
+export default withRouter(PostItem);

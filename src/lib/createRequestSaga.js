@@ -12,6 +12,7 @@ export default function createRequestSaga(actionType, api) {
         type: SUCCESS,
         payload: response.data,
         status: response.status,
+        meta: response,
       });
     } catch (e) {
       yield put({

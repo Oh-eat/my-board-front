@@ -29,15 +29,10 @@ function Editor({ value, onChange, height }) {
       placeholder: "내용",
       modules: {
         toolbar: [
+          [{ header: ["3", "4"] }],
           ["bold", "italic", "underline", "strike"],
-          ["blockquote", "code-block"],
-          [{ header: [1, 2, 3, 4, 5, 6, false] }],
           [{ list: "ordered" }, { list: "bullet" }],
-          [{ indent: "-1" }, { indent: "+1" }],
-          [{ color: [] }, { background: [] }],
-          [{ font: [] }],
-          [{ align: [] }],
-          ["clean"],
+          ["blockquote", "code-block", "link", "image"],
         ],
       },
     });
