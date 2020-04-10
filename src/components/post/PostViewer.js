@@ -40,7 +40,16 @@ const PostBody = styled.div`
   min-height: 40vh;
 `;
 
-function PostViewer({ post, showActionButtons, onUpdate, onRemoveClick }) {
+function PostViewer({
+  post,
+  showActionButtons,
+  commentBody,
+  commentUsername,
+  commentPassword,
+  onUpdate,
+  onRemoveClick,
+  onCommentChange,
+}) {
   return (
     <PostViewerBlock>
       <Toolbar>
@@ -77,6 +86,13 @@ function PostViewer({ post, showActionButtons, onUpdate, onRemoveClick }) {
       <PostBody>
         <p dangerouslySetInnerHTML={{ __html: post.body }}></p>
       </PostBody>
+      <div>
+        {post.comments.map((comment) => (
+          <div key={comment._id}>
+            {comment._id} | {comment.body}
+          </div>
+        ))}
+      </div>
     </PostViewerBlock>
   );
 }

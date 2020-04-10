@@ -5,6 +5,7 @@ import user, { userSaga } from "./user";
 import post, { postSaga } from "./post";
 import posts, { postsSaga } from "./posts";
 import postAction, { postActionSaga } from "./post_action";
+import comment, { commentSaga } from "./comment";
 import loading from "./loading";
 
 const rootReducer = combineReducers({
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   post,
   posts,
   postAction,
+  comment,
   loading,
 });
 
@@ -23,6 +25,7 @@ export const rootSaga = function* () {
     postSaga(),
     postsSaga(),
     postActionSaga(),
+    commentSaga(),
   ]);
 };
 
