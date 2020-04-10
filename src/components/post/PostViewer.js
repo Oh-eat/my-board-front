@@ -1,7 +1,6 @@
 import React from "react";
 import { FiEdit, FiTrash } from "react-icons/fi";
 import Tag from "../common/Tag";
-import formatDate from "../../lib/formatDate";
 import styled from "styled-components";
 import Toolbar from "../common/Toolbar";
 import Button from "../common/Button";
@@ -38,6 +37,7 @@ const SubInfo = styled.div`
 
 const PostBody = styled.div`
   margin-top: 1rem;
+  min-height: 40vh;
 `;
 
 function PostViewer({ post, showActionButtons, onUpdate, onRemoveClick }) {
@@ -69,7 +69,9 @@ function PostViewer({ post, showActionButtons, onUpdate, onRemoveClick }) {
           by <b>{post.author.username}</b>
         </span>
         <span className="bar">|</span>
-        <span className="date">{formatDate(post.publishedDate)}</span>
+        <span className="date">
+          {new Date(post.publishedDate).toLocaleString()}
+        </span>
       </SubInfo>
       <hr />
       <PostBody>
