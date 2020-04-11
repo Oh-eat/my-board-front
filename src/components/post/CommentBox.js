@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import user from "../../modules/user";
 
 const CommentBoxBlock = styled.div`
   margin-top: 1rem;
@@ -64,7 +63,7 @@ function CommentItem({ comment, showRemoveButton }) {
   );
 }
 
-function CommentBox({ comments }) {
+function CommentBox({ comments, user }) {
   return (
     <CommentBoxBlock>
       {comments.length > 0 && (
@@ -76,8 +75,9 @@ function CommentBox({ comments }) {
                 key={comment._id}
                 comment={comment}
                 showRemoveButton={
-                  (user && user._id === comment.author._id) ||
-                  !comment.author._id
+                  !comment.author._id ||
+                  (user && user.membership === "admin") ||
+                  String(user && user._id) === String(comment.author._id)
                 }
               />
             ))}
