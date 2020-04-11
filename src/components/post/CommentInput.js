@@ -14,31 +14,31 @@ const CommentInputBlock = styled.div`
   grid-row-gap: 0.75rem;
   grid-template-columns: 8rem 1fr min-content;
 
-  #label {
+  .label {
     grid-area: label;
     margin-bottom: 1rem;
   }
 
-  #username {
+  .username {
     padding: 0.5rem;
     grid-area: 2 / 1 / 4 / 2;
     align-self: center;
     justify-self: center;
   }
 
-  #usernameInput {
+  .usernameInput {
     grid-area: username;
   }
 
-  #password {
+  .password {
     grid-area: password;
   }
 
-  #body {
+  .body {
     grid-area: body;
   }
 
-  #submit {
+  .submit {
     grid-area: submit;
     justify-self: flex-end;
   }
@@ -105,7 +105,7 @@ const CommentInputBlock = styled.div`
       grid-row-gap: 0.75rem;
       grid-template-columns: repeat(4, 1fr);
 
-      #username {
+      .username {
         grid-area: username;
         justify-self: flex-start;
       }
@@ -124,13 +124,12 @@ function CommentInput({
 }) {
   return (
     <CommentInputBlock>
-      <h2 id="label">댓글 작성</h2>
-      <div id="username" className={user ? "" : "hidden"}>
+      <h2 className="label">댓글 작성</h2>
+      <div className={user ? "username" : "username hidden"}>
         by <b>{user && user.username}</b>
       </div>
       <input
-        id="usernameInput"
-        className={user ? "hidden" : ""}
+        className={user ? "usernameInput hidden" : "usernameInput"}
         placeholder="작성자명"
         name="username"
         value={username}
@@ -139,8 +138,7 @@ function CommentInput({
         maxLength={15}
       />
       <input
-        id="password"
-        className={user ? "hidden" : ""}
+        className={user ? "password hidden" : "password"}
         placeholder="비밀번호"
         name="password"
         type="password"
@@ -150,7 +148,7 @@ function CommentInput({
         maxLength={15}
       />
       <textarea
-        id="body"
+        className="body"
         placeholder="댓글"
         name="body"
         value={body}
@@ -158,7 +156,7 @@ function CommentInput({
         maxLength={100}
         spellCheck={false}
       />
-      <Button id="submit" width="4rem" height="2rem" onClick={onSubmit}>
+      <Button className="submit" width="4rem" height="2rem" onClick={onSubmit}>
         작성
       </Button>
       {inputError && <div className="error">{inputError}</div>}

@@ -4,8 +4,9 @@ import { useSelector } from "react-redux";
 
 function CommentBoxContainer(props) {
   const { comments } = useSelector(({ post }) => post);
+  const { user } = useSelector(({ user }) => user);
 
-  return <CommentBox comments={comments || []} />;
+  return <CommentBox comments={comments || []} user={user} />;
 }
 
 export default CommentBoxContainer;
