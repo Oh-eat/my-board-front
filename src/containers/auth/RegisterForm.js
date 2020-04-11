@@ -68,7 +68,6 @@ function RegisterForm({ history }) {
     }
 
     if (auth) {
-      console.log(auth);
       dispatch(check());
       return;
     }
@@ -86,7 +85,7 @@ function RegisterForm({ history }) {
       } catch (e) {
         console.log("localstorage error");
       }
-      history.push("/");
+      history.goBack();
       return;
     }
   }, [user, userError, history]);

@@ -61,7 +61,6 @@ function LoginForm({ history }) {
     }
 
     if (auth) {
-      console.log(auth);
       dispatch(check());
       return;
     }
@@ -80,7 +79,7 @@ function LoginForm({ history }) {
       } catch (e) {
         console.log("localstorage error");
       }
-      history.push("/");
+      history.goBack();
       return;
     }
   }, [user, userError, history]);
