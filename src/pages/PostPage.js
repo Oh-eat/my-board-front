@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { clearCheck } from "../modules/post_action";
 import CommentInputContainer from "../containers/post/CommentInputContainer";
 import { initializeComment } from "../modules/comment";
+import CommentBoxContainer from "../containers/post/CommentBoxContainer";
 
 function PostPage(props) {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ function PostPage(props) {
   return (
     <>
       <PostViewerContainer />
+      <CommentBoxContainer />
       <CommentInputContainer />
     </>
   );

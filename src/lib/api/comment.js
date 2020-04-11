@@ -7,7 +7,7 @@ export const write = ({
   username,
   password,
 }) =>
-  client.post("/api/comment", {
+  client.post("/api/comments", {
     rootPostId,
     ...(rootCommentId ? { rootCommentId } : {}),
     body,
@@ -15,4 +15,4 @@ export const write = ({
   });
 
 export const remove = ({ id, password }) =>
-  client.delete(`/api/comment/${id}`, { data: { password } });
+  client.delete(`/api/comments/${id}`, { data: { password } });

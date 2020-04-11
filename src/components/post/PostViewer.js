@@ -86,13 +86,6 @@ function PostViewer({
       <PostBody>
         <p dangerouslySetInnerHTML={{ __html: post.body }}></p>
       </PostBody>
-      <div>
-        {post.comments.map((comment) => (
-          <div key={comment._id}>
-            {comment._id} | {comment.body}
-          </div>
-        ))}
-      </div>
     </PostViewerBlock>
   );
 }

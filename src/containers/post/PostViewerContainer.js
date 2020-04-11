@@ -10,7 +10,6 @@ import {
   clearCheck,
 } from "../../modules/post_action";
 import DeleteModal from "../../components/post/DeleteModal";
-import { changeField } from "../../modules/comment";
 
 function PostViewerContainer({ match, history }) {
   const [modal, setModal] = useState(false);
