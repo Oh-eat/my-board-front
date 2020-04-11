@@ -7,6 +7,7 @@ import posts, { postsSaga } from "./posts";
 import postAction, { postActionSaga } from "./post_action";
 import comment, { commentSaga } from "./comment";
 import loading from "./loading";
+import modal from "./modal";
 
 const rootReducer = combineReducers({
   auth,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   postAction,
   comment,
   loading,
+  modal,
 });
 
 export const rootSaga = function* () {

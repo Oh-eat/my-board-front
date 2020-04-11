@@ -7,10 +7,12 @@ import PostPage from "./pages/PostPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import WritePage from "./pages/WritePage";
+import Modals from "./components/common/Modals";
 
 function App() {
   return (
     <>
+      <Modals />
       <Header />
       <Wrapper>
         <Route path={["/", "/post"]} exact component={PostListPage} />
