@@ -18,6 +18,14 @@ const TagBlock = styled.div`
   &:hover {
     background: ${styles.button.color.blue.hover};
   }
+
+  @media (max-width: 768px) {
+    max-width: 6rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+  }
 `;
 
 function Tag({ tag, fontSize, onClick, history }) {

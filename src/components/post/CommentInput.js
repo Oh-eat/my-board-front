@@ -132,7 +132,7 @@ function CommentInput({
         className={user ? "usernameInput hidden" : "usernameInput"}
         placeholder="작성자명"
         name="username"
-        value={username}
+        value={username || ""}
         onChange={onCommentChange}
         spellCheck={false}
         maxLength={15}
@@ -142,7 +142,7 @@ function CommentInput({
         placeholder="비밀번호"
         name="password"
         type="password"
-        value={password}
+        value={password || ""}
         onChange={onCommentChange}
         spellCheck={false}
         maxLength={15}

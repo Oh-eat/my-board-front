@@ -26,30 +26,21 @@ const PostHead = styled.div`
 const SubInfo = styled.div`
   margin-top: 1rem;
   font-size: 1.25rem;
-  display: flex;
-  align-items: center;
 
-  .bar {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+  .date {
+    margin-top: 1rem;
+    color: gray;
+    font-size: 1rem;
   }
 `;
 
 const PostBody = styled.div`
   margin-top: 1rem;
   min-height: 40vh;
+  word-break: break-all;
 `;
 
-function PostViewer({
-  post,
-  showActionButtons,
-  commentBody,
-  commentUsername,
-  commentPassword,
-  onUpdate,
-  onRemoveClick,
-  onCommentChange,
-}) {
+function PostViewer({ post, showActionButtons, onUpdate, onRemoveClick }) {
   return (
     <PostViewerBlock>
       <Toolbar>
@@ -74,13 +65,12 @@ function PostViewer({
         ))}
       </PostHead>
       <SubInfo>
-        <span className="author">
+        <div className="author">
           by <b>{post.author.username}</b>
-        </span>
-        <span className="bar">|</span>
-        <span className="date">
+        </div>
+        <div className="date">
           {new Date(post.publishedDate).toLocaleString()}
-        </span>
+        </div>
       </SubInfo>
       <hr />
       <PostBody>
