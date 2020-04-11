@@ -35,6 +35,14 @@ const PostItemBlock = styled.div`
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+
+      &:hover {
+        color: dodgerblue;
+      }
+
+      &:visited {
+        color: gray;
+      }
     }
 
     .comment {
