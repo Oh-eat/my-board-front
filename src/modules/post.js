@@ -5,10 +5,12 @@ import createRequestSaga from "../lib/createRequestSaga";
 import * as postAPI from "../lib/api/post";
 
 const READ_POST = createActionTypes("post/READ_POST");
+const INITIALIZE_POST = "post/INITIALIZE_POST";
 const ADD_COMMENT = "post/ADD_COMMENT";
 const DELETE_COMMENT = "post/DELETE_COMMENT";
 
 export const readPost = createAction(READ_POST.REQUEST, (id) => id);
+export const initializePost = createAction(INITIALIZE_POST);
 export const addComment = createAction(ADD_COMMENT, (comment) => comment);
 export const deleteComment = createAction(DELETE_COMMENT, (id) => id);
 
@@ -37,6 +39,7 @@ const post = handleActions(
       comments: [],
       error,
     }),
+    [INITIALIZE_POST]: (state) => initialState,
     [ADD_COMMENT]: (state, { payload: comment }) => ({
       ...state,
       comments: state.comments.concat(comment),

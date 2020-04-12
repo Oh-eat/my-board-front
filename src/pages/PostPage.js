@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import PostViewerContainer from "../containers/post/PostViewerContainer";
 import { useDispatch } from "react-redux";
+import PostViewerContainer from "../containers/post/PostViewerContainer";
+import { initializePost } from "../modules/post";
 import { clearCheck } from "../modules/post_action";
-import CommentInputContainer from "../containers/post/CommentInputContainer";
 import { initializeComment } from "../modules/comment";
+import CommentInputContainer from "../containers/post/CommentInputContainer";
 import CommentBoxContainer from "../containers/post/CommentBoxContainer";
 
 function PostPage(props) {
@@ -12,6 +13,7 @@ function PostPage(props) {
   useEffect(() => {
     return () => {
       dispatch(clearCheck());
+      dispatch(initializePost());
       dispatch(initializeComment());
     };
   });
