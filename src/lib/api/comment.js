@@ -15,4 +15,4 @@ export const write = ({
   });
 
 export const remove = ({ id, password }) =>
-  client.delete(`/api/comments/${id}`, { data: { password } });
+  client.delete(`/api/comments/${id}`, { data: password ? { password } : {} });

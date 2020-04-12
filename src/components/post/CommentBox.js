@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const CommentBoxBlock = styled.div`
-  margin-top: 1rem;
+  margin-top: 2rem;
 
   .label {
     margin-bottom: 1rem;
@@ -48,7 +48,7 @@ const CommentItemBlock = styled.div`
   }
 `;
 
-function CommentItem({ comment, showRemoveButton }) {
+function CommentItem({ comment, showRemoveButton, onRemoveClick }) {
   return (
     <CommentItemBlock>
       <div className="username">
@@ -57,13 +57,17 @@ function CommentItem({ comment, showRemoveButton }) {
       <div className="date">
         {new Date(comment.publishedDate).toLocaleString()}
       </div>
-      {showRemoveButton && <div className="remove">×</div>}
+      {showRemoveButton && (
+        <div className="remove" onClick={onRemoveClick}>
+          ×
+        </div>
+      )}
       <div className="body">{comment.body}</div>
     </CommentItemBlock>
   );
 }
 
-function CommentBox({ comments, user }) {
+function CommentBox({ comments, user, onRemoveClick }) {
   return (
     <CommentBoxBlock>
       {comments.length > 0 && (
@@ -79,6 +83,7 @@ function CommentBox({ comments, user }) {
                   (user && user.membership === "admin") ||
                   String(user && user._id) === String(comment.author._id)
                 }
+                onRemoveClick={() => onRemoveClick(comment)}
               />
             ))}
           </div>

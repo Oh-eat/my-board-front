@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import DeleteModal from "../../components/post/DeleteModal";
+import { withRouter } from "react-router-dom";
 import { deletePost, clearCheck, checkDelete } from "../../modules/post_action";
 import { hideModal } from "../../modules/modal";
+import DeleteModal from "../../components/post/DeleteModal";
 
 function DeletePostModalContainer({ history }) {
   const dispatch = useDispatch();
@@ -48,10 +48,19 @@ function DeletePostModalContainer({ history }) {
     }
   }, [error, permission, history, dispatch]);
 
+  const showExecute =
+    permission ||
+    (post.author._id && user) ||
+    (user && user.membership === "admin");
+
+  const showCheck =
+    !permission &&
+    !post.author._id &&
+    (!user || (user && user.membership !== "admin"));
+
   return (
     <DeleteModal
-      user={user}
-      post={post}
+      type="포스트"
       permission={permission}
       error={error}
       onRemoveExecute={onRemoveExecute}
@@ -59,6 +68,8 @@ function DeletePostModalContainer({ history }) {
       onCancel={onCancel}
       password={postPassword}
       onChangePassword={onChangePassword}
+      showCheck={showCheck}
+      showExecute={showExecute}
     />
   );
 }

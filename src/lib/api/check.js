@@ -8,3 +8,6 @@ export const checkPostUpdate = ({ id, password }) =>
 
 export const checkPostDelete = ({ id, password }) =>
   client.post(`/api/check/post/delete/${id}`, { password });
+
+export const checkCommentDelete = ({ id, password }) =>
+  client.post(`/api/check/comment/delete/${id}`, { password });

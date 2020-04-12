@@ -27,5 +27,5 @@ export const update = ({ id, title, body, tags, password }) => {
 
 export const remove = ({ id, password }) =>
   client.delete(`/api/posts/${id}`, {
-    data: { ...(password ? { password } : {}) },
+    data: password ? { password } : {},
   });
