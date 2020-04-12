@@ -121,7 +121,7 @@ function Pagination({ username, page, tag, lastPage }) {
             다음
           </Button>
         )}
-        {page !== lastPage && (
+        {page < lastPage && (
           <Button
             to={buildLink({ username, page: lastPage, tag })}
             width="3rem"
