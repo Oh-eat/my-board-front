@@ -15,6 +15,7 @@ function PostListViewerContainer({ location }) {
 
   useEffect(() => {
     const query = qs.parse(location.search, { ignoreQueryPrefix: true });
+    window.scrollTo({ top: 0 });
     dispatch(listPosts(query));
   }, [dispatch, location.search]);
 
