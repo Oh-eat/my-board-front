@@ -6,10 +6,8 @@ import * as authAPI from "../lib/api/auth";
 
 const INITIALIZE_FORM = "auth/INITIALIZE_FORM";
 const CHANGE_FIELD = "auth/CHANGE_FIELD";
-const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createActionTypes("auth/LOGIN");
-const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] = createActionTypes(
-  "auth/REGISTER"
-);
+const LOGIN = createActionTypes("auth/LOGIN");
+const REGISTER = createActionTypes("auth/REGISTER");
 
 export const initializeForm = createAction(INITIALIZE_FORM);
 export const changeField = createAction(
@@ -20,20 +18,23 @@ export const changeField = createAction(
     value,
   })
 );
-export const login = createAction(LOGIN, ({ username, password }) => ({
+export const login = createAction(LOGIN.REQUEST, ({ username, password }) => ({
   username,
   password,
 }));
-export const register = createAction(REGISTER, ({ username, password }) => ({
-  username,
-  password,
-}));
+export const register = createAction(
+  REGISTER.REQUEST,
+  ({ username, password }) => ({
+    username,
+    password,
+  })
+);
 
 const loginSaga = createRequestSaga(LOGIN, authAPI.login);
 const registerSaga = createRequestSaga(REGISTER, authAPI.register);
 export function* authSaga() {
-  yield takeLatest(LOGIN, loginSaga);
-  yield takeLatest(REGISTER, registerSaga);
+  yield takeLatest(LOGIN.REQUEST, loginSaga);
+  yield takeLatest(REGISTER.REQUEST, registerSaga);
 }
 
 const initialState = {
@@ -61,22 +62,22 @@ const auth = handleActions(
         [name]: value,
       },
     }),
-    [LOGIN_SUCCESS]: (state, { payload: auth }) => ({
+    [LOGIN.SUCCESS]: (state, { payload: auth }) => ({
       ...state,
       auth,
       login: { ...state.login, error: null },
     }),
-    [LOGIN_FAILURE]: (state, { payload: error }) => ({
+    [LOGIN.FAILURE]: (state, { payload: error }) => ({
       ...state,
       auth: null,
       login: { ...state.login, error },
     }),
-    [REGISTER_SUCCESS]: (state, { payload: auth }) => ({
+    [REGISTER.SUCCESS]: (state, { payload: auth }) => ({
       ...state,
       auth,
       register: { ...state.register, error: null },
     }),
-    [REGISTER_FAILURE]: (state, { payload: error }) => ({
+    [REGISTER.FAILURE]: (state, { payload: error }) => ({
       ...state,
       auth: null,
       register: { ...state.register, error },
