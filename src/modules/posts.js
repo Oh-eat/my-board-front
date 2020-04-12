@@ -6,10 +6,7 @@ import * as postAPI from "../lib/api/post";
 
 const LIST_POSTS = createActionTypes("posts/LIST_POSTS");
 
-export const listPosts = createAction(
-  LIST_POSTS.REQUEST,
-  ({ username, tag, query }) => ({ username, tag, query })
-);
+export const listPosts = createAction(LIST_POSTS.REQUEST, (query) => query);
 
 const listPostsSaga = createRequestSaga(LIST_POSTS, postAPI.list);
 export function* postsSaga() {
