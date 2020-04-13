@@ -29,7 +29,7 @@ const AuthFormBlock = styled.div`
     margin-top: 1rem;
   }
 
-  .footer {
+  footer {
     margin-top: 1rem;
     text-align: center;
     color: rgb(120, 120, 120);
@@ -103,13 +103,13 @@ function AuthForm({
           {text}
         </Button>
       </form>
-      <div className="footer">
+      <footer>
         {type === "login" ? (
           <Link to="/register">회원가입</Link>
         ) : (
           <Link to="/login">로그인</Link>
         )}
-      </div>
+      </footer>
     </AuthFormBlock>
   );
 }

@@ -7,7 +7,7 @@ import styles from "../../lib/styles";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../modules/user";
 
-const HeaderBlock = styled.div`
+const HeaderBlock = styled.header`
   width: 100%;
   height: ${styles.header.height};
   background: dodgerblue;

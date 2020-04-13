@@ -2,7 +2,7 @@ import React from "react";
 import Button from "../common/Button";
 import styled from "styled-components";
 
-const CommentInputBlock = styled.div`
+const CommentInputBlock = styled.form`
   margin-top: 2rem;
   display: grid;
   grid-template-areas:
@@ -123,7 +123,7 @@ function CommentInput({
   onSubmit,
 }) {
   return (
-    <CommentInputBlock>
+    <CommentInputBlock onSubmit={onSubmit}>
       <h2 className="label">댓글 작성</h2>
       <div className={user ? "username" : "username hidden"}>
         by <b>{user && user.username}</b>
@@ -156,7 +156,7 @@ function CommentInput({
         maxLength={100}
         spellCheck={false}
       />
-      <Button className="submit" width="4rem" height="2rem" onClick={onSubmit}>
+      <Button className="submit" width="4rem" height="2rem">
         작성
       </Button>
       {inputError && <div className="error">{inputError}</div>}

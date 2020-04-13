@@ -13,7 +13,7 @@ const PostViewerBlock = styled.div`
   }
 `;
 
-const PostHead = styled.div`
+const PostHead = styled.header`
   margin-top: 1rem;
 
   h1 {
@@ -34,7 +34,7 @@ const SubInfo = styled.div`
   }
 `;
 
-const PostBody = styled.div`
+const PostBody = styled.article`
   margin-top: 1rem;
   min-height: 40vh;
   word-break: break-all;

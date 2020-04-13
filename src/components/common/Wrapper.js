@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import styles from "../../lib/styles";
 
-const OuterWrapper = styled.div`
+const OuterWrapper = styled.main`
   min-height: calc(
     100% - ${styles.header.height} - ${styles.wrapper.marginTop}*2
   );

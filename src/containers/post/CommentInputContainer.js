@@ -29,22 +29,29 @@ function CommentInputContainer({ match, history }) {
     },
     [dispatch]
   );
-  const onSubmit = useCallback(() => {
-    if (body.trim() === "") {
-      return;
-    }
+  const onSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
 
-    if (!user) {
-      if ([username, password].includes("")) {
-        setInputError("작성자명과 비밀번호를 모두 입력해 주세요.");
+      if (body.trim() === "") {
         return;
       }
 
-      dispatch(writeComment({ rootPostId: postId, body, username, password }));
-      return;
-    }
-    dispatch(writeComment({ rootPostId: postId, body }));
-  }, [dispatch, postId, body, username, password, user]);
+      if (!user) {
+        if ([username, password].includes("")) {
+          setInputError("작성자명과 비밀번호를 모두 입력해 주세요.");
+          return;
+        }
+
+        dispatch(
+          writeComment({ rootPostId: postId, body, username, password })
+        );
+        return;
+      }
+      dispatch(writeComment({ rootPostId: postId, body }));
+    },
+    [dispatch, postId, body, username, password, user]
+  );
 
   useEffect(() => {
     if (error) {
