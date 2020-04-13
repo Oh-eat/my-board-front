@@ -3,7 +3,7 @@ import qs from "qs";
 import { withRouter } from "react-router-dom";
 import PostListViewer from "../../components/posts/PostListViewer";
 import { useSelector, useDispatch } from "react-redux";
-import { listPosts } from "../../modules/posts";
+import { listPosts, unloadPosts } from "../../modules/posts";
 
 function PostListViewerContainer({ location }) {
   const dispatch = useDispatch();
@@ -18,6 +18,12 @@ function PostListViewerContainer({ location }) {
     window.scrollTo({ top: 0 });
     dispatch(listPosts(query));
   }, [dispatch, location.search]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(unloadPosts());
+    };
+  }, [dispatch]);
 
   if (error) return <h1>ERROR</h1>;
 
