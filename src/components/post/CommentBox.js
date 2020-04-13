@@ -1,15 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-const CommentBoxBlock = styled.div`
+const CommentBoxBlock = styled.ul`
   margin-top: 2rem;
+  padding: 0;
 
   .label {
     margin-bottom: 1rem;
   }
 `;
 
-const CommentItemBlock = styled.div`
+const CommentItemBlock = styled.li`
   padding: 0.5rem;
   display: grid;
   grid-row-gap: 0.5rem;
@@ -20,6 +21,7 @@ const CommentItemBlock = styled.div`
     "date date"
     "body body";
   align-items: center;
+  list-style-image: none;
 
   .username {
     grid-area: username;

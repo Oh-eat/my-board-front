@@ -13,6 +13,7 @@ const PostListViewerBlock = styled.div`
 
   .posts {
     margin-top: 1rem;
+    padding: 0;
   }
 `;
 
@@ -29,11 +30,11 @@ function PostListViewer({ posts }) {
           </Button>
         </div>
       </Toolbar>
-      <div className="posts">
+      <ul className="posts">
         {posts.map((post) => (
           <PostItem key={post._id} post={post} />
         ))}
-      </div>
+      </ul>
       <PaginationContainer />
     </PostListViewerBlock>
   );

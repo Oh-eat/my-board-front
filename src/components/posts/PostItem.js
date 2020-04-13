@@ -6,7 +6,7 @@ import { Link, withRouter } from "react-router-dom";
 import Tag from "../common/Tag";
 import formatDate from "../../lib/formatDate";
 
-const PostItemBlock = styled.div`
+const PostItemBlock = styled.li`
   width: 100%;
   display: grid;
   grid-template-areas:
@@ -17,6 +17,7 @@ const PostItemBlock = styled.div`
   justify-items: center;
   align-items: center;
   padding: 0.5rem;
+  list-style-image: none;
 
   .icon {
     grid-area: icon;
